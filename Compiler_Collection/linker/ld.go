@@ -3,5 +3,5 @@ package linker
 import "fmt"
 
 func Link() {
-	fmt.Println("Hello,Compiler!")
+	fmt.Println("Hello,Linker!")
 }
