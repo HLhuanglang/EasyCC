@@ -1,0 +1,6 @@
+go 1.19
+
+use (
+	./Compiler_Collection/compiler
+	./Compiler_Collection/linker
+)
