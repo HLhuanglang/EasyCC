@@ -1,7 +1,9 @@
 #ifndef __EASYCC_TOEKN_H
 #define __EASYCC_TOEKN_H
 
+#include <any>
 #include <string>
+#include <utility>
 #include <vector>
 
 enum token_type_e {
@@ -96,5 +98,42 @@ inline std::string to_string(token_type_e type) {
 
     return s_token_strings[static_cast<int>(type)];
 }
+
+class Token {
+ public:
+    Token(token_type_e type, std::string lexeme, std::any literal, int line)
+        : m_type(type), m_lexeme(std::move(lexeme)), m_literal(std::move(literal)), m_line(line) {}
+
+ public:
+    [[nodiscard]] std::string to_string() const {
+        std::string literal_text;
+        switch (m_type) {
+            case (IDENTIFIER):
+                literal_text = m_lexeme;
+                break;
+            case (STRING):
+                literal_text = std::any_cast<std::string>(m_literal);
+                break;
+            case (NUMBER):
+                literal_text = std::to_string(std::any_cast<double>(m_literal));
+                break;
+            case (TRUE):
+                literal_text = "true";
+                break;
+            case (FALSE):
+                literal_text = "false";
+                break;
+            default:
+                literal_text = "nil";
+        }
+        return ::to_string(m_type) + " " + m_lexeme + " " + literal_text;
+    }
+
+ public:
+    const token_type_e m_type;
+    const std::string m_lexeme;
+    const int m_line;
+    const std::any m_literal;
+};
 
 #endif // !__EASYCC_TOEKN_H
