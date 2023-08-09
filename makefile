@@ -1,19 +1,40 @@
-# Define all variables
-TARGET_ECC = ecc
-OUTDIR = Build
+##封装一些功能
+MAKE  = make --no-print-directory
+MAKEF = $(MAKE) -f makefile.in
+MKDIR = -mkdir -p 2>/dev/null
+CP    = -cp -r 2>/dev/null
+RM    = -rm -r 2>/dev/null
 
+#============================================================
+# 通用编译步骤
+#============================================================
+.PHONY: default
+default:
+	@echo "Usage: make type=[type] [action]"
+	@echo "--[type  ]: interpreter, vm, compiler"
+	@echo "--[action]: build, clean, test"
 
-# Rules
-.PHONY: linker
-linker:premake
-	go build  -gcflags "-N -l" -o ${OUTDIR}/${TARGET_ECC} ecc.go
-
+.PHONY: all
+all: interpreter vm compiler
 
 .PHONY: premake
 premake:
-	@mkdir -p ${OUTDIR}
+	mkdir -p cc/${type}/build
 
 
-.PHONY:clean
+#============================================================
+# 编译cc
+#============================================================
+type=""
+
+.PHONY: build
+build: premake
+	@${MAKE} -C cc/${type}
+
+.PHONY: test
+test:
+	@${MAKE} -C cc/${type} test
+
+.PHONY: clean
 clean:
-	rm -rf ${OUTDIR}
+	@${MAKE} -C cc/${type} clean

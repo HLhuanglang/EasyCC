@@ -1,0 +1,7 @@
+// this is a comment
+(( )){} // grouping stuff
+!*+-/=<> <= == // operators
+<>{},.-+;/*
+! != = == > >= < <=
+a "a" 1
+and class else false fun for if nil or print return super this true var while
