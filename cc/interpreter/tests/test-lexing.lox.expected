@@ -36,6 +36,7 @@ LESS_EQUAL <= nil
 IDENTIFIER a a
 STRING "a" a
 NUMBER 1 1.000000
+STRING "Holo_wo" Holo_wo
 AND and nil
 CLASS class nil
 ELSE else nil
