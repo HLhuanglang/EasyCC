@@ -14,7 +14,8 @@ class Scanner {
     std::vector<Token> scan_tokens();
 
  private:
-    char _advance(); //获取当前字符并向前移动1位
+    char _advance();           //获取当前字符并向前移动1位
+    char _advance_n(int step); //获取当前字符并向前移动step位
     void _scan();
     void _add_token(token_type_e type);
     void _add_token(token_type_e type, std::any literal);
@@ -28,6 +29,7 @@ class Scanner {
     static bool _is_alph(char c);
     static bool _is_alph_numeric(char c);
     void _identifier();
+    bool _is_right_block_comment(); //右块注释 */
 
  private:
     std::string_view m_source; //存储所有源码

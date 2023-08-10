@@ -23,8 +23,8 @@ DOT . nil
 MINUS - nil
 PLUS + nil
 SEMICOLON ; nil
-SLASH / nil
 STAR * nil
+SLASH / nil
 BANG ! nil
 BANG_EQUAL != nil
 EQUAL = nil
@@ -53,4 +53,5 @@ THIS this nil
 TRUE true true
 VAR var nil
 WHILE while nil
+IDENTIFIER hello hello
 END_OF_FILE  nil

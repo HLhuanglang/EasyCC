@@ -1,7 +1,12 @@
 // this is a comment
 (( )){} // grouping stuff
 !*+-/=<> <= == // operators
-<>{},.-+;/*
+<>{},.-+;*/
 ! != = == > >= < <=
 a "a" 1 "Holo_wo"
 and class else false fun for if nil or print return super this true var while
+/* 
+    this is a comment   //comment
+*/
+hello
+/**/

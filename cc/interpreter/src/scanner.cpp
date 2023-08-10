@@ -37,6 +37,12 @@ char Scanner::_advance() {
     return m_source[m_curr++];
 }
 
+char Scanner::_advance_n(int step) {
+    int old_idx = m_curr;
+    m_curr += step;
+    return m_source[old_idx];
+}
+
 void Scanner::_add_token(token_type_e type, std::any iteral) {
     std::string text{m_source.substr(m_start, m_curr - m_start)};
     m_tokens.emplace_back(type, std::move(text), std::move(iteral),
@@ -147,6 +153,10 @@ void Scanner::_identifier() {
     _add_token(type);
 }
 
+bool Scanner::_is_right_block_comment() {
+    return _peek() == '*' && _peek_next() == '/';
+}
+
 void Scanner::_scan() {
     char c = _advance();
     switch (c) {
@@ -203,6 +213,22 @@ void Scanner::_scan() {
             if (_match('/')) {
                 while (_peek() != '\n' && !_is_at_end()) {
                     _advance();
+                }
+            } else if (_match('*')) {
+                bool is_found = false;
+                while (!_is_at_end()) {
+                    if (_peek() == '\n') {
+                        m_line++;
+                    }
+                    if (_is_right_block_comment()) {
+                        _advance_n(2);
+                        is_found = true;
+                        break;
+                    }
+                    _advance();
+                }
+                if (!is_found) {
+                    error(m_line, "Unterminated block comment.");
                 }
             } else {
                 _add_token(token_type_e::SLASH);
