@@ -14,9 +14,6 @@ default:
 	@echo "--[type  ]: interpreter, vm, compiler"
 	@echo "--[action]: build, clean, test"
 
-.PHONY: all
-all: interpreter vm compiler
-
 .PHONY: premake
 premake:
 	mkdir -p cc/${type}/build

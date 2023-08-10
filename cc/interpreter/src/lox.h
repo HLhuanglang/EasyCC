@@ -10,7 +10,7 @@ class Lox {
     static void run_prompt();
 
  private:
-    static void _run(std::string_view contents);
+    static void _run(std::string_view contents, bool new_line);
 };
 
 #endif // !__EASYCC_LOX_H

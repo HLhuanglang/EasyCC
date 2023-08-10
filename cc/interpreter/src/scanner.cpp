@@ -29,6 +29,7 @@ std::vector<Token> Scanner::scan_tokens() {
         m_start = m_curr;
         _scan();
     }
+    m_tokens.emplace_back(END_OF_FILE, "", nullptr, m_line);
     return m_tokens;
 }
 
