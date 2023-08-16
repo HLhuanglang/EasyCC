@@ -10,28 +10,20 @@ RM    = -rm -r 2>/dev/null
 #============================================================
 .PHONY: default
 default:
-	@echo "Usage: make type=[type] [action]"
+	@echo "Usage: make build type=[type] action=[action]"
 	@echo "--[type  ]: interpreter, vm, compiler"
-	@echo "--[action]: build, clean, test"
+	@echo "--[action]: build, clean, test, tools"
 
 .PHONY: premake
 premake:
-	mkdir -p cc/${type}/build
-
+	${MKDIR} cc/${type}/build
 
 #============================================================
 # 编译cc
 #============================================================
 type=""
+action=""
 
-.PHONY: build
+.PHONY:build 
 build: premake
-	@${MAKE} -C cc/${type}
-
-.PHONY: test
-test:
-	@${MAKE} -C cc/${type} test
-
-.PHONY: clean
-clean:
-	@${MAKE} -C cc/${type} clean
+	@${MAKE} -C cc/${type} ${action}

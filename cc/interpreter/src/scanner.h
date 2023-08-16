@@ -1,7 +1,7 @@
 #ifndef __EASYCC_SCANNER_H
 #define __EASYCC_SCANNER_H
 
-#include "toekn.h"
+#include "token.h"
 #include <map>
 #include <string_view>
 #include <vector>

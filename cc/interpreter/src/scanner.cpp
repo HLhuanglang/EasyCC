@@ -1,6 +1,6 @@
 #include "scanner.h"
 #include "error.h"
-#include "toekn.h"
+#include "token.h"
 #include <any>
 #include <vector>
 
@@ -228,6 +228,9 @@ void Scanner::_scan() {
                     _advance();
                 }
                 if (!is_found) {
+                    if (_peek() == '\0') {
+                        m_line++;
+                    }
                     error(m_line, "Unterminated block comment.");
                 }
             } else {
